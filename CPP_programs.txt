@@ -1,0 +1,2793 @@
+C++ Programming
+1.C++ STL pair
+#include <iostream>
+#include <utility>
+using namespace std;
+int main()
+{
+pair<int ,char>PAIR1;
+PAIR1.first=100;
+PAIR1.second='K';
+cout<<PAIR1.first<<" ";
+cout<<PAIR1.second;
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+2.c++ Delete operator
+How to delete array of objects in C++?
+#include<iostream>
+using namespace std;
+int main()
+{
+int size,i;
+int *arr=new int[size];
+cout<<"Enter the size of array:";
+cin>>size;
+cout<<"Enter the values:";
+for(i=0;i<size;i++)
+{
+cin>>arr[i];
+}
+cout<<"your entered vlues are:"<<endl;
+for(i=0;i<size;i++)
+{
+cout<<arr[i]<<endl;
+}
+delete[] arr;
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.C++ Parameterized Constructor
+#include<iostream>
+using namespace std;
+class student{
+public:
+int id;
+string name;
+//Parameterized Constructor
+student(int i,string n)
+{
+id=i;
+name=n;
+}
+void display()
+{
+cout<<id<<" "<<name<endl;
+}
+};
+
+int main()
+{
+student s1=student(1712136,"karthi");
+student s2=student(1712129,"gokul");
+student s3=student(1712111,"dhinesh");
+s1.display();
+s2.display();
+s3.display();
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+4.c++ class and objects
+#include <iostream>
+using namespace std;
+class Student{
+public:
+int id;
+string name;
+};
+int main()
+{
+Student s1;
+s1.id=1712136;
+s1.name="karthi srini";
+cout<<s1.id<<endl;
+cout<<s1.name;
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+5.Find the largest three elements in an array
+ii.Find Second largest element in an array
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+void print4largest(int arr[],int arr_size)
+{
+int first,second,third,forth;
+if(arr_size<4)
+{
+cout<<"Invalid Input";
+return;
+}
+first=second=third=forth=INT_MIN;
+for(int i=0;i<arr_size;i++)
+{
+if(arr[i]>first)
+{
+forth=third;
+third=second;
+second=first;
+first=arr[i];
+}
+else if(arr[i]>second && arr[i]!=first)
+{
+forth=third;
+third=second;
+second=arr[i];
+}
+
+else if(arr[i]>third && arr[i]!=second &&arr[i]!=first)
+{
+forth=third;
+third=arr[i];
+}
+else if(arr[i]>forth && arr[i]!=third && arr[i]!=second &&arr[i]!=first)
+{
+forth=arr[i];
+}
+}
+//cout<<"The lagrest 4 element are:"<<first<<" "<<second<<" "<<third<<"
+"<<forth;
+cout<<"The second largest element are:"<<second;
+}
+int main()
+{
+int arr[]={12,24,13,67,28,56,45};
+int n=sizeof(arr)/sizeof(arr[0]);
+print4largest(arr,n);
+return 0;
+}
+ii.other method
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+void print4largest(int arr[],int arr_size)
+{
+int first,second;
+first=second=INT_MIN;//Each variable is initialized to INT_MIN (usually
+-2147483648 for 32-bit int).
+for(int i=0;i<arr_size;i++)
+{
+if(arr[i]>first)
+{
+second=first;
+first=arr[i];
+}
+else if(arr[i]>second && arr[i]!=first)
+{
+second=arr[i];
+}
+}
+cout<<"The second largest element are:"<<second;
+}
+int main()
+{
+int arr[]={12,24,13,67,28,56,45};
+int n=sizeof(arr)/sizeof(arr[0]);
+print4largest(arr,n);
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+6.Move all zeroes to end of array
+i.Shift the zeros to the right of the array
+#include<iostream>
+using namespace std;
+void shiftzerosright(int arr[],int n){
+int j=0;
+for(int i=0;i<n;i++){
+
+if(arr[i]!=0){
+arr[j++]=arr[i];
+}
+}
+while(j<n){
+arr[j++]=0;
+}
+}
+int main(){
+int arr[]={1,0,2,0,3,0,4};
+int n=sizeof(arr)/sizeof(arr[0]);
+shiftzerosright(arr,n);
+cout<<"After shifting zeros to right:"<<endl;
+for(int i=0;i<n;i++){
+cout<<arr[i]<<" ";
+}
+return 0;
+}
+ii.Shift the zeros to the left of the array
+#include<iostream>
+using namespace std;
+void shiftzeroleft(int arr[],int n){
+int j=n-1;
+for(int i=n-1;i>=0;i--){
+if(arr[i]!=0){
+arr[j--]=arr[i];
+}
+}
+while(j>=0){
+arr[j--]=0;
+}
+}
+int main(){
+int arr[]={1,0,2,0,3,0,4};
+int n=sizeof(arr)/sizeof(arr[0]);
+shiftzeroleft(arr,n);
+cout<<"After shifting zeros to left:"<<endl;
+for(int i=0;i<n;i++){
+cout<<arr[i]<<" ";
+}
+return 0;
+}
+iii.move all zeros to the right side of a vector:  
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void moveZerosRight(vector<int>& v) {
+    int j = 0; // index to place non-zero elements
+
+    // Move all non-zero elements to the front
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i] != 0) {
+            v[j++] = v[i];
+        }
+    }
+
+    // Fill remaining positions with zeros
+    while (j < v.size()) {
+        v[j++] = 0;
+    }
+}
+
+int main() {
+    vector<int> v = {1, 0, 0, 1, 0, 0, 1};
+
+    moveZerosRight(v);
+
+    cout << "After moving zeros to right: ";
+    for (int num : v) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+iv.move all zeros to the left side of a vector:
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void moveZerosLeft(vector<int>& v) {
+    int j = v.size() - 1; // index to place non-zero elements from the end
+
+    // Move all non-zero elements to the end
+    for (int i = v.size() - 1; i >= 0; i--) {
+        if (v[i] != 0) {
+            v[j--] = v[i];
+        }
+    }
+
+    // Fill the remaining (left) positions with zeros
+    while (j >= 0) {
+        v[j--] = 0;
+    }
+}
+
+int main() {
+    vector<int> v = {1, 0, 0, 1, 0, 0, 1};
+
+    moveZerosLeft(v);
+
+    cout << "After moving zeros to left: ";
+    for (int num : v) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+7.Rearrange array such that even positioned are greater than odd
+#include <iostream>
+using namespace std;
+void swap(int *a,int *b)
+{
+int temp=*a;
+*a=*b;
+*b=temp;
+}
+void rearrange(int arr[],int n)
+{
+for(int i=0;i<n-1;i+=2)
+{
+if(arr[i]<arr[i+1])
+{
+swap(&arr[i+1],&arr[i]);
+}
+
+}
+}
+int main()
+{
+int n=5;
+int arr[]={12,34,35,57,86};
+rearrange(arr,n);
+for(int i=0;i<n;i++)
+{
+cout<<arr[i]<<" ";
+}
+return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+8.C++ Method Overloading:
+#include<iostream>
+#include<string.h>
+using namespace std;
+class OverloadExamble{
+public:
+void print(int a,int b)
+{
+cout<<"Add the two number:"<<a+b<<endl;
+}
+void print(double a,int b)
+{
+cout<<"Multiple the two number:"<<a*b<<endl;
+}
+void print(string str)
+{
+cout<<"Print the string:"<<str;
+}
+};
+int main(){
+OverloadExamble obj;
+obj.print(24,25);
+obj.print(2.5,5);
+obj.print("Method OverloadExamble");
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+9.Calculator program using switch statement in C++
+#include <iostream>
+using namespace std;
+int main()
+{
+int a,b;
+char op;
+cout<<"Enter the first value:";
+cin>>a;
+cout<<"Enter the second vale:";
+cin>>b;
+cout<<"Enter the operation:";
+cin>>op;
+switch(op){
+case '+':
+
+cout<<a+b;
+break;
+case '-':
+cout<<a-b;
+break;
+case '*':
+cout<<a*b;
+break;
+case '/':
+cout<<a/b;
+break;
+default:
+cout<<"invalid input";
+break;
+}
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+10.calculator program using if else statement in C++
+#include <iostream>
+using namespace std;
+int main()
+{
+int num1,num2,result;
+char op;
+cout<<"Enter the first number:";
+cin>>num1;
+cout<<"Enter the operator:";
+cin>>op;
+cout<<"Enter the second number:";
+cin>>num2;
+if(op=='+')
+{
+result=num1+num2;
+}
+else if(op=='-')
+{
+result=num1-num2;
+}
+else if(op=='*')
+{
+result=num1*num2;
+}
+else if(op=='/')
+{
+result=num1/num2;
+}
+else{
+cout<<"Invalied number";
+}
+cout<<"Result is:"<<result;
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+11.palindrome c++
+#include <bits/stdc++.h>
+using namespace std;
+string ispalindrome(string s)
+{
+string p=s;
+
+reverse(p.begin(),p.end());
+if(s==p){
+return "yes";
+}
+else{
+return "no";
+}
+}
+int main()
+{
+string s="ABCDCBA";
+cout<<ispalindrome(s);
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+12.data types of c++
+#include <iostream>
+#include<cmath>
+using namespace std;
+int main()
+{
+float num=10.3;
+double num1=12.3;
+num++;
+cout<<num<<endl;
+cout<<num1<<endl;
+cout<<round(16.6);
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+13.string getline c++
+#include <iostream>
+using namespace std;
+int main()
+{
+string color;
+cout<<"enter the color:";
+getline(cin,color);
+cout<<color;
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+14.maximum number using if else statement in c++
+#include <iostream>
+using namespace std;
+int getmax(int num1,int num2,int num3)
+{
+int result;
+if(num1>=num2 && num1>=num3)
+{
+result=num1;
+}
+else if(num2>=num1 && num2>=num3)
+{
+result=num2;
+}
+
+else{
+result=num3;
+}
+return result;
+}
+int main()
+{
+cout<<getmax(81,24,23);
+return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+15.guess secretnum in c++
+#include <iostream>
+using namespace std;
+int main()
+{
+int secretnum=6;
+int guessnum;
+while(secretnum != guessnum){
+cout<<"Enter guess:";
+cin>>guessnum;
+}
+cout<<"you win!";
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+16.guess secretnum using limit in c++
+#include <iostream>
+using namespace std;
+int main()
+{
+int secretnum=6;
+int guessnum;
+int guesscount=0;
+int guesslimit=3;
+bool outofguess=false;
+while(secretnum != guessnum && !outofguess){
+if(guesslimit>guesscount){
+cout<<"Enter guess:";
+cin>>guessnum;
+guesscount++;
+}
+else{
+outofguess=true;
+}
+}
+if(outofguess){
+cout<<"you loss!";
+}
+else{
+cout<<"you win!";
+}
+return 0;
+}
+--------------------------------------------------------------------------------
+17.calculate base and power of c++ program
+#include <iostream>
+using namespace std;
+int power(int baseNum,int powerNum){
+int result=1;
+for(int i=0;i<powerNum;i++)
+{
+result =result*baseNum;//1*6=6 6*6=36
+}
+return result;
+}
+int main()
+{
+cout<<power(6,2);
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+18.print book details using class function in c++
+#include <iostream>
+using namespace std;
+class Book{
+public:
+int pages;
+string title;
+string author;
+};
+int main()
+{
+Book book1;
+book1.pages=237;
+book1.title="The lard";
+book1.author="muruga";
+Book book2;
+book2.pages=143;
+book2.title="Gord of wall";
+book2.author="vinayaka";
+cout<<book1.pages<<endl;
+cout<<book2.title<<endl;
+cout<<book2.author;
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+19.constructor using class in c++
+#include <iostream>
+using namespace std;
+class Book{
+public:
+int pages;
+string title;
+string author;
+Book(string atitle,string aauthor,int apages){
+pages=apages;
+
+title=atitle;
+author=aauthor;
+}
+};
+int main()
+{
+Book book1("The lard","muruga",237);
+Book book2("The king","karthi",143);
+cout<<book2.author;
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+20.constructor on bool using class in c++
+#include <iostream>
+using namespace std;
+class Book{
+public:
+int pages;
+string title;
+string author;
+Book(string atitle,string aauthor,int apages){
+pages=apages;
+title=atitle;
+author=aauthor;
+}
+bool hasHorners()
+{
+if(pages>144)
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+};
+int main()
+{
+Book book1("The lard","muruga",237);
+Book book2("The king","karthi",143);
+cout<<book1.hasHorners();
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+21.multithreading using join in c++ program
+#include <iostream>
+#include<thread>
+using namespace std;
+class base{
+public:
+static void run(int x){
+while(x-->0)
+{
+cout<<x<<endl;
+}
+this_thread::sleep_for(chrono::seconds(5));
+}
+};
+
+int main()
+{
+thread t(base::run,10);
+cout<<"Hii_start"<<endl;
+t.join();
+if(t.joinable())
+t.join();
+cout<<"Hello_end"<<endl;
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+22.Reverse of array of integer c++
+#include <iostream>
+using namespace std;
+int main()
+{
+int size,value[100],temp;
+cout<<"Enter the size:";
+cin>>size;
+cout<<"Enter the value:";
+for(int i=0;i<size;i++)
+{
+cin>>value[i];
+}
+for(int i=0;i<size/2;i++)
+{
+temp=value[i];
+value[i]=value[size-i-1];
+value[size-i-1]=temp;
+}
+cout<<"Result:";
+for(int i=0;i<size;i++)
+{
+cout<<value[i]<<" ";
+}
+return 0;
+}
+ii.print the reverse char string with space in c++
+#include <iostream>
+#include<cstring>
+using namespace std;
+void Reversestring(char str[])
+{
+int length=strlen(str);
+int start=0;
+int end=length-1;
+char temp;
+while(start<end)
+{
+temp=str[start];
+str[start]=str[end];
+str[end]=temp;
+start++;
+end--;
+}
+}
+
+int main()
+{
+char str[100];
+cout<<"Enter the string:";
+cin.getline(str,100);
+Reversestring(str);
+cout<<"After the string:"<<str;
+return 0;
+}
+iii.Reverse the string
+I/P: Hello World
+O/P: World Hello
+#include <iostream>
+#include <sstream>
+#include <vector>
+using namespace std;
+int main() {
+string input;
+cout << "Enter a string: ";
+getline(cin, input); // Input: Hello World
+stringstream ss(input);
+string word;
+vector<string> words;
+// Split input into words
+while (ss >> word) {
+words.push_back(word);
+}
+// Print words in reverse order
+for (int i = words.size() - 1; i >= 0; i--) {
+cout << words[i]<< " ";
+}
+//cout << endl;
+return 0;
+}
+IV.reverse only the 5th word in a given sentence using C++
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main() {
+string sentence;
+cout << "Enter a sentence: ";
+getline(cin, sentence);
+stringstream ss(sentence);
+string word;
+vector<string> words;
+// Split sentence into words
+while (ss >> word) {
+words.push_back(word);
+
+}
+// Check if 5th word exists
+if (words.size() >= 5) {
+reverse(words[4].begin(), words[4].end());
+
+// reverse 5th word (index 4)
+} else {
+cout << "Sentence has less than 5 words!" << endl;
+return 0;
+}
+// Rebuild sentence
+for (size_t i = 0; i < words.size(); i++) {
+cout << words[i];
+if (i != words.size() - 1) cout << " ";
+}
+cout << endl;
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+23.find largest element in matrix mulitiplication
+#include <iostream>
+using namespace std;
+int main()
+{
+int row,column,i,j;
+int array[10][10];
+cout<<"Enter the row:";
+cin>>row;
+cout<<"Enter the column:";
+cin>>column;
+cout<<"Enter the elements:";
+for(i=0;i<row;i++)
+{
+for(j=0;j<column;j++)
+{
+cin>>array[i][j];
+}
+}
+cout<<"The elements of mattrix:"<<endl;
+for(i=0;i<row;i++)
+{
+for(j=0;j<column;j++)
+{
+cout<<array[i][j]<<" ";
+}
+cout<<endl;
+}
+int max=array[0][0];
+cout<<"Largest number are:"<<endl;
+for(i=0;i<row;i++)
+{
+for(j=0;j<column;j++)
+{
+if(max<array[i][j])
+{
+max=array[i][j];
+}
+}
+
+}
+cout<<max;
+return 0;
+}-----------------------------------------------------------------------------------------------------------------------------------------------------
+24.c++ calculate two number
+#include<iostream>
+using namespace std;
+int main()
+{
+int num1,num2,result;
+num1=10;
+num2=20;
+result=num1+num2;
+cout<<"Result="<<result;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+25.Addition of two number
+#include<iostream>
+using namespace std;
+int main(){
+int num1,num2,result;
+cout<<"Enter num1 value:";
+cin>>num1;
+cout<<"Enter num2 value:";
+cin>>num2;
+result=num1+num2;
+cout<<"Result="<<result;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+26.print on max amount c++
+#include <iostream>
+using namespace std;
+int Max(int x,int y);
+int main()
+{
+int a,b;
+cout<<"Enter a value:";
+cin>>a;
+cout<<"Enter b value:";
+cin>>b;
+int m=Max(a,b);
+cout<<"Max value="<<m;
+return 0;
+}
+int Max(int x,int y)
+{
+if(x>y)
+return x;
+else
+return y;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+27.pointer in c++
+#include <iostream>
+using namespace std;
+
+void karthi()
+{
+int var=20;
+int *ptr;
+ptr=&var;
+cout<<"Var value at="<<var<<endl;
+cout<<"Ptr vale at="<<ptr<<endl;
+cout<<"*ptr vale ar="<<*ptr<<endl;
+}
+int main()
+{
+karthi();
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+28.loops of C++
+#include<iostream>
+using namespace std;
+int main()
+{
+int i,j,k;
+cout<<"For loop:"<<endl;
+for(i=1;i<=5;i++){
+cout<<i<<endl;
+}
+cout<<"Do while loop:"<<endl;
+j=1;
+do{
+cout<<j<<endl;
+j++;
+}while(j<=5);
+cout<<"while loop:"<<endl;
+k=1;
+while(k<=5){
+cout<<k<<endl;
+k++;
+}
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+29.print the string with spaces in c++
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+string inputString;
+cout << "Enter a string with spaces: ";
+getline(std::cin, inputString);
+cout << "You entered: " << inputString << std::endl;
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+30.call by value on C++
+#include <iostream>
+
+using namespace std;
+void swap(int x,int y);
+int main()
+{
+int a,b;
+cout<<"Enter a value:"<<endl;
+cin>>a;
+cout<<"Enter b value:"<<endl;
+cin>>b;
+cout<<"a="<<a<<"b="<<b<<endl;
+swap(a,b);
+return 0;
+}
+void swap(int x,int y){
+int t;
+t=x;
+x=y;
+y=t;
+cout<<"x="<<x<<"y="<<y;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+31.call by reference on C++
+#include <iostream>
+using namespace std;
+void swap(int* x,int* y);
+int main()
+{
+int a,b;
+cout<<"Enter a value:"<<endl;
+cin>>a;
+cout<<"Enter b value:"<<endl;
+cin>>b;
+cout<<"a="<<a<<"b="<<b<<endl;
+swap(&a,&b);
+return 0;
+}
+void swap(int* x,int* y){
+int t;
+t=*x;
+*x=*y;
+*y=t;
+cout<<"x="<<*x<<"y="<<*y;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+34.goto program of c++
+#include <iostream>
+using namespace std;
+int main()
+{
+int age;
+cout<<"Enter your age:\n";
+cin>>age;
+if (age < 18){
+goto ineligible;
+}
+else if(age>=18)
+{
+cout<<"You are eligible to vote!";
+
+}
+else
+ineligible:
+cout<<"You are not eligible to vote!\n";
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+33.multithreading using detach in c++ program
+#include <iostream>
+#include<thread>
+using namespace std;
+class base{
+public:
+static void run(int x){
+while(x-->0)
+{
+cout<<x<<endl;
+}
+}
+};
+int main()
+{
+thread t(base::run,10);
+cout<<"Hii_start"<<endl;
+t.detach();
+if(t.joinable())
+t.detach();
+cout<<"Hello_end"<<endl;
+this_thread::sleep_for(chrono::seconds(5));
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+34.costructor with in class
+#include <iostream>
+using namespace std;
+class student
+{
+int rno;
+char name[50];
+double fee;
+public:
+student()
+{
+cout<<"Enter the rno:";
+cin>>rno;
+cout<<"Enter the name:";
+cin>>name;
+cout<<"Enter the fees:";
+cin>>fee;
+}
+void display()
+{
+cout<<rno<<"\t"<<name<<"\t"<<fee;
+}
+};
+int main()
+{
+student s;
+s.display();
+
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+35.printing minimum number of array in c++
+#include <iostream>
+using namespace std;
+void printmin(int arr[5]);
+int main()
+{
+int arr1[5]={20,10,30,40,50};
+int arr2[5]={25,15,35,45,55};
+printmin(arr1);
+printmin(arr2);
+return 0;
+}
+void printmin(int arr[5])
+{
+int min=arr[0];
+for(int i=0;i<5;i++)
+{
+if(min>arr[i])
+{
+min=arr[i];
+}
+}
+cout<< "Minimum element is: "<<min<<endl;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+36.printing maximum number of array in c++
+#include <iostream>
+using namespace std;
+void printMax(int arr[5]);
+int main()
+{
+int arr1[5] = { 25, 10, 54, 15, 40 };
+int arr2[5] = { 12, 23, 44, 67, 54 };
+printMax(arr1);
+printMax(arr2);
+}
+void printMax(int arr[5])
+{
+int max = arr[0];
+for (int i = 0; i < 5; i++)
+{
+if (max < arr[i])
+{
+max = arr[i];
+}
+}
+cout<< "Maximum element is: "<< max <<"\n";
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+37.matrix of c++
+#include <iostream>
+using namespace std;
+int main()
+{
+int matrix[3][3]={
+
+{2,4,6},
+{1,3,5},
+{7,8,9}
+};
+for(int i=0;i<3;i++)
+{
+for(int j=0;j<3;j++)
+{
+cout<<matrix[i][j]<<" ";
+}
+cout<<endl;
+}
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+38.find the sizeof c++ program
+#include <iostream>
+//#pragma pack(1)
+using namespace std;
+struct A
+{
+int c;
+double s;//8 byte
+};
+struct base{
+char a;
+A b;//16 byte
+int d;
+int e;
+};
+int main()
+{
+cout<<sizeof(base);
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+39.pass the pointer value in c++
+#include <iostream>
+using namespace std;
+void change(int* newx){
+*newx=20;
+}
+int main()
+{
+int x=10;
+change(&x);
+cout<<"X:"<<x<<endl;
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+40.class phone progrm in c++
+#include <iostream>
+using namespace std;
+class phone{
+
+string p_name;
+string p_size;
+public:
+phone(string name,string size)
+{
+p_name=name;
+p_size=size;
+}
+void makecall(){
+cout<<"make call phone is:"<<p_name<<endl;
+}
+void receivingcall(){
+cout<<"receiving call size is:"<<p_size<<endl;
+}
+};
+int main()
+{
+phone oppo("oppoA3","1000x500");
+oppo.makecall();
+oppo.receivingcall();
+cout<<endl;
+phone iqz6("1qz6_5g","1500x500");
+iqz6.makecall();
+iqz6.receivingcall();
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+41.Recursion in c++
+#include <iostream>
+using namespace std;
+void print(int times){
+if(times==0)
+return;
+cout<<"C++:"<<times<<endl;
+--times;
+print(times);
+cout<<"Recursion:"<<times<<endl;
+}
+int main()
+{
+print(3);
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+42.using keyword of static in c++
+#include <iostream>
+using namespace std;
+class base{
+public:
+int x;
+static int y;
+};
+int base::y;
+//if your mentioned static value you can use like this.
+int main()
+{
+base b1;
+b1.x=10;
+
+b1.y=20;
+base b2;
+b2.x=30;
+b2.y=40;
+cout<<b1.x<<endl;
+cout<<b1.y<<endl;
+cout<<b2.x<<endl;
+cout<<b2.y<<endl;
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+43.data hiding program in c++
+#include <iostream>
+using namespace std;
+class ksplayer{
+int volume;
+//private data
+public:
+ksplayer():volume{0} {}
+void setvolume(int x){
+if(x>=0 && x<=100){
+cout<<"set"<<endl;
+}else{
+cout<<"not set"<<endl;
+}
+}
+};
+int main()
+{
+ksplayer ks;
+ks.setvolume(10);
+ks.setvolume(190);
+return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+44.unary operator in c++
+#include <iostream>
+using namespace std;
+class point{
+int x;
+int y;
+public:
+point(int x=0,int y=0):x{x},y{y} {}
+void print(){
+cout<<"x:"<<x<<" "<<"y:"<<y<<endl;
+}
+point operator -(){
+return point(-x,-y);
+}
+};
+int main()
+{
+point p1(1,2),p2(3,4);
+p1.print();
+p2.print();
+point p3=-p2;
+
+p3.print();
+//cout<<"Hello World";
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+45.inheritance in c++
+ii.runtime polimorphism
+#include <iostream>
+using namespace std;
+class animals{
+public:
+void eat(){cout<<"Eating"<<endl;}
+};
+class dog :public animals{
+public:
+void talk(){cout<<"wowoww"<<endl;}
+};
+class cat :public animals{
+public:
+void talk(){cout<<"meioo"<<endl;}
+};
+int main()
+{
+dog d;
+cat c;
+d.eat();
+d.talk();
+c.eat();
+c.talk();
+return 0;
+}
+ii.Function Overridig
+Virtual function
+inheritance in c++
+runtime polimorphism
+#include<iostream>
+using namespace std;
+class animals{
+public:
+virtual void talk(){
+cout<<"Some animals sound"<<endl;
+}
+};
+class dog:public animals{
+public:
+void talk(){
+cout<<"woww"<<endl;
+}
+};
+class cat:public animals{
+public:
+void talk(){
+cout<<"meioo"<<endl;
+}
+};
+int main(){
+animals* a1=new dog();
+animals* a2=new cat();
+a1->talk();
+
+a2->talk();
+// Force base class call using scope operator
+a1->animals::talk(); // Output: Some animals sound
+a2->animals::talk(); // Output: Some animals sound
+// Force base class call using typecasting
+static_cast<animals*>(a1)->animals::talk(); // Output: Some animals sound
+static_cast<animals*>(a2)->animals::talk(); // Output: Some animals sound
+delete a1;
+delete a2;
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+46.function overloading in c++
+ii.compile time polimorphism
+#include <iostream>
+using namespace std;
+void print(int ,int ){
+cout<<"first int"<<endl;
+}
+void print(double d,double e)
+{
+cout<<"second double"<<endl;
+}
+void print(char ,char )
+{
+cout<<"thrid char"<<endl;
+}
+void print(int k,double s)
+{
+cout<<"forth"<<endl;
+}
+int main()
+{
+print(2,3);
+print(8,4.5);
+print(2.2,5.4);
+print('a','b');
+return 0;
+}
+ii
+#include<iostream>
+using namespace std;
+void sum(int a,int b){
+cout<<a+b<<endl;
+}
+void sum(float x,float y){
+cout<<x+y<<endl;
+}
+int main()
+{
+int a,b;
+float x,y;
+cout<<"Enter the int vlues:"<<endl;
+cin>>a>>b;
+cout<<"Enter the float values:"<<endl;
+cin>>x>>y;
+
+sum(a,b);
+sum(x,y);
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+47.Recursion in c++
+#include <iostream>
+using namespace std;
+int nSum(int n){
+if(n==0){
+return 0;
+}
+int res=n+nSum(n-1); //5+nSum(5-1) 4+nSum(4-1) 3+nSum(3-1) 2+nSum(2-1)
+1+nSum(1-1) n==0
+return res;
+}
+int main()
+{
+int n;
+cout<<"Enter the value of number:";
+cin>>n; //5
+int sum=nSum(n);
+cout<<"sum="<<sum; //5+4+3+2+1+nSum(0)=15
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+48.without main function able to complie program
+#include <iostream>
+using namespace std;
+#define fun main
+int fun()
+{
+cout<<"Hi Karthikeyan!";
+return 0;
+}
+ii.Basic class program in c++
+#include <iostream>
+using namespace std;
+class Foo {
+public:
+void kar() {
+cout << "Hello karthi" << endl;
+}
+};
+int main() {
+Foo s;
+s.kar(); // Call the kar function
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+49.copy constructor in c++
+#include <iostream>
+#include<string.h>
+
+using namespace std;
+class student{
+int rno;
+char name[50];
+double fee;
+public:
+student(int ,char[],double);
+student(student &t){
+rno=t.rno;
+strcpy(name,t.name);
+fee=t.fee;
+}
+void display();
+};
+student::student(int no,char n[],double f)
+{
+rno=no;
+strcpy(name,n);
+fee=f;
+}
+void student::display(){
+cout<<"rno="<<rno<<"\t"<<"name="<<name<<"\t"<<"fee="<<fee<<endl;
+}
+int main()
+{
+student s(1653,"karthi",22000);
+s.display();
+student karthi(s);
+karthi.display();
+return 0;
+
+//copy constructor called
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+50.Dorr open lock pattern in c++
+#include <iostream>
+using namespace std;
+int main() {
+const int CORRECT_PIN = 1234;
+int userPin;
+int attempts = 3;
+cout << "Welcome to the Digital Lock System" << endl;
+while (attempts > 0) {
+cout << "Enter your 4-digit PIN: ";
+cin >> userPin;
+if (userPin == CORRECT_PIN) {
+cout << "Door Unlocked! Welcome!" << endl;
+return 0;
+} else {
+attempts--;
+cout << "Incorrect PIN! " << attempts << " attempts remaining." <<
+endl;
+}
+}
+cout << "Too many failed attempts! The system is now locked." << endl;
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+51.write a program on inserting the numbers using vector and map and display it
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+map<int,int>mp;
+mp.insert({1,13});
+mp.insert({4,23});
+mp.insert({2,24});
+mp.insert({3,67});
+cout<<"keys"<<"\t"<<"elements"<<endl;
+for(auto itr=mp.begin();itr!=mp.end();itr++){
+cout<<itr->first<<"\t"<<itr->second<<endl;
+}
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+52.constructor and destructor sample program in c++
+#include <iostream>
+using namespace std;
+class Myclass{
+public:
+Myclass(){
+cout<<"Constructor called:"<<endl;
+}
+~Myclass(){
+cout<<"Destructor called:"<<endl;
+}
+};
+int main() {
+cout << "creating object"<<endl;
+Myclass obj;
+cout << "destroyed object"<<endl;
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+53.write a cpp program find year month weeks and days in a input.
+#include <iostream>
+using namespace std;
+int main()
+{
+int tot,year,month,week,days;
+cout<<"Enter the total:"<<endl;
+cin>>tot;
+year=tot/365;
+month=(tot%365)/30;
+week=((tot%365)%30)/7;
+days=((tot%365)%30)%7;
+cout<<"Year:"<<year<<endl;
+cout<<"Month:"<<month<<endl;
+cout<<"Week:"<<week<<endl;
+cout<<"Days:"<<days<<endl;
+
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+54.Cpp Program to check if given year is leap year or not
+The year is a multiple of 400
+The year is a multiple of 4 but not a multiple of 100
+#include<iostream>
+using namespace std;
+int main(){
+int year;
+cout<<"Enter the year:";
+cin>>year;
+if((year%4==0 && year%100!=0) || year%400==0)
+{
+cout<<year<<" is a leap year"<<endl;
+}
+else{
+cout<<year<<" is a not leap year"<<endl;
+}
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+55.function without argument without return value
+#include <iostream>
+using namespace std;
+void sum();
+int main()
+{
+sum();
+return 0;
+}
+void sum()
+{
+int a,b,result;
+cout<<"Enter the values of a and b:"<<endl;
+cin>>a>>b;
+result=a+b;
+cout<<"sum is:"<<result<<endl;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+56.function with argument without return value
+#include <iostream>
+using namespace std;
+void sum(int,int);
+int main() {
+int a,b;
+cout << "Enter two value:"<<endl;
+cin>>a>>b;
+sum(a,b);
+return 0;
+}
+void sum(int num1,int num2){
+int result;
+result=num1+num2;
+cout<<"Result is:"<<result<<endl;
+
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+57.function without argument and with return value
+#include <iostream>
+using namespace std;
+int sum();
+int main() {
+int c;
+c=sum();
+cout<<"Result is:"<<c;
+return 0;
+}
+int sum()
+{
+int a,b,result;
+cout<<"Enter the two values:"<<endl;
+cin>>a>>b;
+result=a+b;
+return result;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+58.function with argument with return value
+#include <iostream>
+using namespace std;
+int sum(int,int);
+int main() {
+int a,b,c;
+cout << "Enter the two values:"<<endl;
+cin>>a>>b;
+c=sum(a,b);
+cout<<"Result is:"<<c;
+return 0;
+}
+int sum(int num1,int num2){
+int result;
+result=num1+num2;
+return result;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+59.Dublicate char
+Remove duplicate chars from string without using tmp
+#include<stdio.h>
+#include<string.h>
+int main(){
+char s1[15]="Using Pointers";
+int count;
+for(int i=0;i<strlen(s1);i++)
+{
+count=1;
+for(int j=i+1;j<strlen(s1);j++)
+{
+if(s1[i]==s1[j])
+{
+count++;
+
+}
+}
+if(count>1)
+printf("%c\n",s1[i]);
+}
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+60.character is vowel or not
+#include<iostream>
+using namespace std;
+int main(){
+char ch;
+cout<<"Enter the character:"<<endl;
+cin>>ch;
+if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'){
+cout<<ch<<" is a vowel"<<endl;
+}
+else{
+cout<<ch<<" is a not vowel"<<endl;
+}
+}
+-------------------------------------------------------------------------------------------------------------------------------------
+61.Virtual function
+#include<iostream>
+using namespace std;
+class base{
+public:
+Virtual void show(){
+cout<<"Base class"<<endl;
+}
+};
+class Derived1:public base{
+public:
+void show(){
+cout<<"Derived1 class"<<endl;
+}
+};
+class Derived2:public base{
+public:
+void show(){
+cout<<"Derived2 class"<<endl;
+}
+};
+int main(){
+base *b;
+Derived1 d1;
+Derived2 d2;
+b=&d1;
+b->show();
+b=&d2;
+b->show();
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+62.The length of last word in c++
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int length(string str){
+int count=0;
+bool flag=false;//flag is used to indicate if we've started counting
+for(int i=str.length()-1;i>=0;i--){//This helps in detecting the last word
+directly.
+if((str[i]>='a' && str[i]<='z') || (str[i]>='A' && str[i]<='Z')){
+flag=true; //indicates we're inside a word
+count++;
+}
+else{
+// this means we've reached the end of the last word.
+if(flag==true){
+return count;
+}
+}
+}
+return count;
+}
+int main(){
+string str;
+cout<<"Enter the string:"<<endl;
+getline(cin,str);
+cout<<"The length of last word is:"<<length(str);
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+63.The length of first word in c++
+#include<iostream>
+using namespace std;
+int length(string str){
+int count=0;
+for(int i=0;i<str.length();i++){
+if((str[i]>='a' && str[i]<='z') || (str[i]>='A' && str[i]<='Z')){
+count++;
+}
+else{
+if(count>0){
+return count;
+}
+}
+}
+return count;
+}
+int main(){
+string str="Karthik writing a program";
+cout<<"The first word length is:"<<length(str);
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+64.Default Constructor
+#include<iostream>
+using namespace std;
+class A{
+public:
+int sum=0;
+A(); // default constructor with no argument
+A(int a,int b){
+sum=a+b;
+}
+
+void display(){
+cout<<"Sum: "<<sum<<endl;
+}
+};
+int main(){
+A obj1(10,92);
+A obj2(5,10);
+obj1.display();
+obj2.display();
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------
+65.copy constructor
+#include <iostream>
+using namespace std;
+class A {
+public:
+int x;
+A(){};
+// Copy Constructor definition
+A (A& a) { //A &a  takes a reference to another object of the same class.
+x = a.x; //x = a.x; copies the value of x from the passed object.
+cout << "Copy constructor called" << endl;
+}
+};
+int main() {
+// Creating an object of
+// class A1
+A a1;
+a1.x = 10;
+cout << "a1's x = " << a1.x << endl;
+// Creating another object by
+// copying already created object
+A a2(a1);
+cout << "a2's x = " << a2.x;
+return 0;
+}
+ii.Copy constractor with parameterzied constractor
+#include<iostream>
+using namespace std;
+class student{
+int id;
+string name;
+public:
+student(int i,string n){
+id=i;
+name=n;
+cout<<"Parameterzied constructor called:"<<endl;
+}
+student(const student &s){
+id=s.id;
+name=s.name;
+cout<<"Copy constructor called:"<<endl;
+}
+void display(){
+cout<<"ID:"<<id<<" "<<"Name:"<<name<<endl;
+}
+};
+int main(){
+
+student s1(12,"karthi");
+s1.display();
+student s2=s1;
+s2.display();
+return 0;
+}
+
+iii.Copy assignment operator
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+    int id;
+    string name;
+
+public:
+    // Parameterized constructor
+    Student(int i, string n) {
+        id = i;
+        name = n;
+        cout << "Parameterized constructor called\n";
+    }
+
+    // Copy constructor
+    Student(const Student &s) {
+        id = s.id;
+        name = s.name;
+        cout << "Copy constructor called\n";
+    }
+
+    // Copy assignment operator
+    Student& operator=(const Student &s) {
+        cout << "Copy assignment operator called\n";
+        // Check for self-assignment
+        if (this != &s) {
+            id = s.id;
+            name = s.name;
+        }
+        return *this;
+    }
+
+    void display() {
+        cout << "ID: " << id << ", Name: " << name << endl;
+    }
+};
+
+int main() {
+    Student s1(1, "Karthik");  // Parameterized constructor
+    Student s2 = s1;           // Copy constructor
+
+    Student s3(3, "Rahul");
+    s3 = s1;                   // Copy assignment operator
+
+    cout << "\nFinal Data:\n";
+    s1.display();
+    s2.display();
+    s3.display();
+
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+67.C++ Templates
+#include<iostream>
+using namespace std;
+template<class T>T add(T &a,T &b){
+T Result=a+b;
+return Result;
+}
+int main(){
+int a=10,b=29;
+float c=34.31,d=27.56;
+cout<<"Addition:"<<add(a,b)<<endl;
+cout<<"Addition:"<<add(c,d)<<endl;
+return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------
+68.Sum of digits using recurssion
+#include<iostream>
+using namespace std;
+int sum(int n){
+if(n==0){
+return 0;
+}
+return (n % 10) + sum(n / 10);
+}
+int main(){
+int result=sum(191);
+cout<<result;
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------
+69.Addition of two number without +
+#include<iostream>
+using namespace std;
+int add(int a,int b);
+int main(){
+int x,y;
+cout<<"Enter the a and b"<<endl;
+cin>>x>>y;
+cout<<"Result:"<<add(x,y);
+return 0;
+}
+int add(int a,int b){
+int c;
+while(b!=0){
+c=a&b;
+
+a=a^b;
+b=c<<1;
+}
+return a;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+70.Subtraction of two number without -
+#include<iostream>
+using namespace std;
+int sub(int a,int b);
+int main(){
+int x,y;
+cout<<"Enter the a and b"<<endl;
+cin>>x>>y;
+cout<<"Result:"<<sub(x,y);
+return 0;
+}
+int sub(int a,int b){
+while(b!=0){
+a--;
+b--;
+}
+return a;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+71.Multiplication of two number without *
+#include<iostream>
+using namespace std;
+int mul(int a,int b);
+int main(){
+int x,y;
+cout<<"Enter the a and b"<<endl;
+cin>>x>>y;
+cout<<"Result:"<<mul(x,y);
+return 0;
+}
+int mul(int a,int b){
+int c=0;
+while(b!=0){
+c+=a;
+b--;
+}
+return c;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+72.division of two number without /
+#include<iostream>
+using namespace std;
+int dev(int a,int b);
+int main(){
+int x,y;
+cout<<"Enter the a and b"<<endl;
+cin>>x>>y;
+
+cout<<"Result:"<<dev(x,y);
+return 0;
+}
+int dev(int a,int b){
+if(b==0){
+cout<<"Error not divideby 0:"<<endl;
+}
+int c=0;
+while(a >=b){
+a-=b;
+c++;
+}
+return c;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+73.print the 2D array
+#include<iostream>
+using namespace std;
+int main(){
+int arr[2][3];
+cout<<"the 2D array input:"<<endl;
+for(int i=0;i<2;i++){
+for(int j=0;j<3;j++){
+cin>>arr[i][j];
+}
+}
+cout<<"the 2D array is:"<<endl;
+for(int i=0;i<2;i++){
+for(int j=0;j<3;j++){
+cout<<arr[i][j]<<" ";
+}
+cout<<endl;
+}
+return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------
+74.diamond problem
+// Ambiguity error
+No ambiguity due to virtual inheritance
+#include<iostream>
+using namespace std;
+class base{
+public:
+void fun(){
+cout<<"Base class"<<endl;
+}
+};
+class parent1:virtual public base{
+public:
+};
+class parent2:virtual public base{
+public:
+};
+class child:public parent1,public parent2{
+};
+int main(){
+child *obj=new child();
+
+obj->fun();
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------75.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+76.Reverse Word Order Using a Class Constructor
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+class ReverseWords {
+public:
+ReverseWords(string input) {
+stringstream ss(input);
+string word;
+vector<string> words;
+// Split input into words
+while (ss >> word) {
+words.push_back(word);
+}
+// Reverse the vector of words
+reverse(words.begin(), words.end());
+// Print the reversed sentence
+for (size_t i = 0; i < words.size(); ++i) {
+cout << words[i];
+if (i != words.size() - 1) cout << " ";
+}
+cout << endl;
+}
+};
+int main() {
+string input = "Karhikryan writing a code";
+ReverseWords rw(input); // Constructor will handle reversal
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+77.check if the string is a palindrome
+#include <iostream>
+#include <string>
+using namespace std;
+// Function to check if the string is a palindrome
+bool isPalindrome(const string& str) {
+int start = 0;
+int end = str.length() - 1;
+while (start < end) {
+if (str[start] != str[end]) {
+return false;
+
+}
+start++;
+end--;
+}
+return true;
+}
+int main() {
+string input;
+cout << "Enter a string: ";
+getline(cin, input); // Read full line including spaces
+if (isPalindrome(input)) {
+cout << "The string is a palindrome." << endl;
+} else {
+cout << "The string is not a palindrome." << endl;
+}
+return 0;
+}
+ii.Palindrome in integer
+#include<iostream>
+using namespace std;
+int main(){
+int sum=0,n,temp,r;
+cout<<"Enter the number:";
+cin>>n;
+temp=n;
+while(n>0){
+r=n%10;
+sum=(sum*10)+r;
+n=n/10;
+}
+if(temp==sum){
+cout<<"is palindriome"<<endl;
+}
+else{
+cout<<"Not a palindriome"<<endl;
+}
+return 0;
+}
+iii.find the palindriome count and word from sentance
+#include <iostream>
+#include <sstream> // for istringstream helps you split a sentence into words easily
+#include <string>
+using namespace std;
+// Function to check if the string is a palindrome
+bool isPalindrome(const string& str) {
+int start = 0;
+int end = str.length() - 1;
+while (start < end) {
+if (str[start] != str[end]) {
+return false;
+}
+start++;
+end--;
+
+}
+return true;
+}
+int main() {
+string input;
+cout << "Enter a sentence: ";
+getline(cin, input); // take full sentence input from user
+istringstream iss(input);
+string word;
+int count = 0;
+cout << "Palindrome words: ";
+// Split sentence and check each word
+while (iss >> word) {
+if (isPalindrome(word)) {
+cout << word << " ";
+count++;
+}
+}
+cout << "\nNumber of palindromes: " << count << endl;
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+78.find and print the length of the longest word that is a palindrome from a
+given string or sentence:
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <algorithm>
+using namespace std;
+// Function to check if a word is a palindrome
+bool isPalindrome(const string& word) {
+int left = 0, right = word.size() - 1;
+while (left < right) {
+if (word[left] != word[right])
+return false;
+++left;
+--right;
+}
+return true;
+}
+int main() {
+string input;
+cout << "Enter a sentence: ";
+getline(cin, input);
+stringstream ss(input);
+string word;
+int maxLength = 0;
+while (ss >> word) {
+// Remove punctuation if needed (optional)
+word.erase(remove_if(word.begin(), word.end(), ::ispunct), word.end());
+
+if (isPalindrome(word)) {
+maxLength = max(maxLength, (int)word.length());
+}
+}
+cout << "Length of the longest palindromic word: " << maxLength << endl;
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+79.Sort array
+#include<iostream>
+using namespace std;
+int main(){
+int arr[]={5,2,8,1,3};
+int size=sizeof(arr)/sizeof(arr[0]);
+//sort(arr,arr+size);
+for(int i=0;i<size-1;i++){
+for(int j=0;j<size-i-1;j++){
+if(arr[j]>arr[j+1]){
+int temp;
+temp=arr[j];
+arr[j]=arr[j+1];
+arr[j+1]=temp;
+}
+}
+}
+cout<<"sorted array is:";
+for(int i=0;i<size;i++){
+cout<<arr[i]<<" ";
+}
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+80.I/P:-1,1,0,100
+O/P:0,-1,0,1,0,0,0,0,100,0
+#include<iostream>
+using namespace std;
+int main(){
+int input[]={-1,1,0,100};
+int n=sizeof(input)/sizeof(input[0]);
+for(int i=0;i<n;i++){
+if(input[i]==0){
+cout<<"0,0,"<<input[i]<<",";
+}
+else{
+cout<<"0,"<<input[i]<<",";
+}
+}
+cout<<"0";
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+81.copy constractor with lambda expression program
+#include<iostream>
+
+using namespace std;
+class person{
+public:
+string name;
+person(string n){
+name =n;
+}
+person(const person& p){
+name=p.name;
+cout<<"Copy constractor:"<<endl;
+}
+};
+int main(){
+person p1("karthi");
+auto show=[](person p){
+cout<<"name:"<<p.name;
+};
+show(p1);
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+82.function pointer
+#include <iostream>
+using namespace std;
+int add(int a, int b) {
+return a + b;
+}
+int main() {
+int (*ptr)(int, int) = add;
+int result = ptr(5, 3); // Call via pointer
+cout << "Sum: " << result << endl; // Output: 8
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------
+83.thread program
+#include<iostream>
+#include<thread>
+using namespace std;
+void Function1(){
+for(int i=0;i<5;i++){
+cout<<"Function1:"<<i<<endl;
+}
+}
+void Function2(){
+for(int i=0;i<5;i++){
+cout<<"function2:"<<i<<endl;
+}
+}
+int main(){
+thread t1(Function1);
+thread t2(Function2);
+
+t1.join();
+t2.join();
+cout<<"End of program:"<<endl;
+return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+84.reference
+#include<iostream>
+using namespace std;
+int main(){
+int a=10;
+int &b=a;
+cout<<"a:"<<a<<endl;
+cout<<"b:"<<b<<endl;// b is a reference to a
+b=20;
+cout<<"b:"<<b<<endl;
+return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+85.design pattern Singleton in c++
+#include <iostream>
+using namespace std;
+class Singleton {
+private:
+// Step 1: Private static instance
+static Singleton* instance;
+// Step 2: Private constructor
+Singleton() {
+cout << "Singleton instance created!" << endl;
+}
+public:
+// Step 3: Public method to access the instance
+static Singleton* getInstance() {
+if (instance == nullptr) {
+instance = new Singleton();
+}
+return instance;
+}
+void showMessage() {
+cout << "Hello from Singleton!" << endl;
+}
+};
+// Step 4: Initialize static member
+Singleton* Singleton::instance = nullptr;
+// Main function
+int main() {
+// Try to get instance multiple times
+Singleton* s1 = Singleton::getInstance();
+s1->showMessage();
+Singleton* s2 = Singleton::getInstance();
+s2->showMessage();
+
+// Check if both instances are same
+if (s1 == s2) {
+cout << "Both instances are the same (Singleton works!)" << endl;
+} else {
+cout << "Different instances (Singleton failed!)" << endl;
+}
+return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+86.copy a one string to another string
+i.#include <iostream>
+#include <cstring>
+// for strcpy
+using namespace std;
+int main() {
+char str1[] = "Karthi";
+char str2[50];
+// must be large enough to hold the copy
+// Copy str1 into str2
+strcpy(str2, str1);
+cout << "Original: " << str1 << endl;
+cout << "Copy: " << str2 << endl;
+return 0;
+}
+ii.#include <iostream>
+using namespace std;
+int main() {
+char str1[] = "karthi";
+char str2[50];
+int i = 0;
+while (str1[i] != '\0') {
+str2[i] = str1[i];
+i++;
+}
+str2[i] = '\0'; // null-terminate the string
+cout << "Original: " << str1 << endl;
+cout << "Copy: " << str2 << endl;
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------
+87.print duplicate chars from string.
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main(){
+char s1[]="Karthi srinis";
+int count;
+cout<<"duplicate values:";
+for(int i=0;i<strlen(s1);i++){
+count=1;
+for(int j=i+1;j<strlen(s1);j++){
+if(s1[i]==s1[j]){
+
+count++;
+}
+}
+if(count>1){
+cout<<s1[i];
+}
+}
+return 0;
+}
+ii..Remove duplicate chars from string
+#include<iostream>
+#include<string>
+using namespace std;
+string removeduplicate(string str){
+string result="";
+for(int i=0;i<str.length();i++){
+if(result.find(str[i])==string::npos){
+result+=str[i];
+}
+}
+return result;
+}
+int main(){
+string str;
+cout<<"Enter the string:"<<endl;
+getline(cin,str);
+cout<<"Removing a duplicate char:"<<removeduplicate(str);
+return 0;
+}
+result.find(str[i]) searches result for the current character str[i].
+If the character is not found, find returns string::npos.
+The test == string::npos means this char is not yet in result.
+----------------------------------------------------------------------------------------------------------------------------------
+88.Array repeating element to identify
+#include<iostream>
+using namespace std;
+int main(){
+int arr[]={3,6,1,8,3,8,4,1};
+int n=sizeof(arr)/sizeof(arr[0]);
+cout<<"Print the repeating numbers:";
+for(int i=0;i<n;i++){
+for(int j=i+1;j<n;j++){
+if(arr[i]==arr[j]){
+cout<<arr[i]<<" ";
+break;
+}
+}
+}
+return 0;
+}
+ii.Array Non repeating element to identify
+#include<iostream>
+using namespace std;
+int main(){
+int arr[]={1,2,3,4,6,7,3,1,3};
+
+int size=sizeof(arr)/sizeof(arr[0]);
+cout<<"Non repeating array is:";
+for(int i=0;i<size;i++){
+bool repeating=false;//for the current i,this flag assumes the element
+is unique untill a duplicate found.
+for(int j=0;j<size;j++){
+if(arr[i]==arr[j] && i!=j){
+repeating=true;
+break;
+}
+}
+if(!repeating){
+cout<<arr[i]<<" ";
+}
+}
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+88.Exception Handling
+#include <iostream>
+using namespace std;
+int main() {
+int a = 10, b = 0;
+try {
+if (b == 0)
+throw "Division by zero error!";
+cout << "Result: " << a / b << endl;
+}
+catch (const char* msg) {
+cout << "Exception caught: " << msg << endl;
+}
+cout << "Program continues..." << endl;
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------
+89.set greater and less
+#include<iostream>
+#include<set>
+using namespace std;
+int main(){
+set<int,greater<int>> s1={2,6,4,5,8};
+set<int,less<int>> s2={3,2,7,1,8,6};
+cout<<"set grater: ";
+for(int x:s1){
+cout<<x<<" ";
+}
+cout<<"\nset less: ";
+for(int x:s2){
+cout<<x<<" ";
+}
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+90.Vector greater and less
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main(){
+vector<int> v={3,2,5,7,1};
+sort(v.begin(),v.end());
+cout<<"Lesser values:";
+for(int x:v){
+cout<<x<<" ";
+}
+sort(v.begin(),v.end(),greater<int>());
+cout<<"\nGrater values:";
+for(int x:v){
+cout<<x<<" ";
+}
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+91.shallow copy
+Copies only the pointer values, not the actual data.
+Both objects share the same memory changing one affects the other
+#include <iostream>
+using namespace std;
+class Shallow {
+public:
+int *data;
+Shallow(int val) {
+data = new int(val);
+}
+// Default copy constructor (shallow copy)
+// Just copies the pointer, not the data
+};
+int main() {
+Shallow obj1(10);
+Shallow obj2 = obj1;
+
+// shallow copy (default)
+
+cout << "Before change: *obj1.data = " << *obj1.data
+<< ", *obj2.data = " << *obj2.data << endl;
+*obj2.data = 20; // change obj2 also changes obj1
+cout << "After change: *obj1.data = " << *obj1.data
+<< ", *obj2.data = " << *obj2.data << endl;
+return 0;
+}
+Before change: *obj1.data = 10, *obj2.data = 10
+After change: *obj1.data = 20, *obj2.data = 20
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ii.Deep copy
+
+Copies the actual data, not just the pointer.
+Each object has its own memory copy a independent.
+#include <iostream>
+using namespace std;
+class Deep {
+public:
+int *data;
+Deep(int val) {
+data = new int(val);
+}
+// Deep copy constructor
+Deep(const Deep &other) {
+data = new int(*other.data);
+}
+
+// new memory allocation
+
+~Deep() {
+delete data; // free memory
+}
+};
+int main() {
+Deep obj1(10);
+Deep obj2 = obj1;
+
+// calls deep copy constructor
+
+cout << "Before change: *obj1.data = " << *obj1.data
+<< ", *obj2.data = " << *obj2.data << endl;
+*obj2.data = 20; // change obj2 does NOT affect obj1
+cout << "After change: *obj1.data = " << *obj1.data
+<< ", *obj2.data = " << *obj2.data << endl;
+return 0;
+}
+Before change: *obj1.data = 10, *obj2.data = 10
+After change: *obj1.data = 10, *obj2.data = 20
+----------------------------------------------------------------------------------------------------------------------------------------------
+92.HCF(Highest Common Factor) or GCD(Greatest Common Divisor)
+#include<iostream>
+using namespace std;
+int hcf(int a,int b){
+int temp;
+while(b!=0){
+temp=b;
+b=a%b;
+a=temp;
+}
+return a;
+}
+int main(){
+int x,y;
+cout<<"Enter the x and y values:"<<endl;
+cin>>x>>y;
+cout<<"Highest Common Factor:"<<hcf(x,y);
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------
+93. finding the frequency of the elements in the given array in c++
+#include <iostream>
+using namespace std;
+int main() {
+int arr[] = {10, 20, 10, 30, 20, 10, 40};
+int size = sizeof(arr) / sizeof(arr[0]);
+int freq[size];
+// to mark visited elements
+// Initialize frequency array
+for (int i = 0; i < size; i++) {
+freq[i] = -1; //Initialize every freq[i] to -1. Here -1 means a not yet counted.
+}
+// Count frequencies
+for (int i = 0; i < size; i++) {
+if (freq[i] != 0) {
+// if not already counted
+int count = 1;
+for (int j = i + 1; j < size; j++) {
+if (arr[i] == arr[j]) {
+count++;
+freq[j] = 0; // mark as counted
+}
+}
+freq[i] = count;
+}
+}
+// Print result
+cout << "Element frequencies:\n";
+for (int i = 0; i < size; i++) {
+if (freq[i] != 0) {
+cout << arr[i] << " occurs " << freq[i] << " times\n";
+}
+}
+return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------
+94.Find the list is circular list or not
+//main() creates three nodes on the heap (new), links them into a list 1 -> 2 ->
+3 -> NULL.
+//If you uncomment third->next = head;, the list becomes circular: 1 -> 2 -> 3
+-> (back to 1).
+#include <iostream>
+using namespace std;
+struct Node {
+int data;
+Node* next;
+Node(int val) : data(val), next(NULL) {}
+};
+bool isCircular(Node* head) {
+if (head == NULL) return false;
+Node* temp = head->next;
+
+while (temp != NULL && temp != head) {
+temp = temp->next;
+}
+return (temp == head); // true if circular, false otherwise
+}
+int main() {
+// Creating nodes
+Node* head = new Node(1);
+Node* second = new Node(2);
+Node* third = new Node(3);
+// Linking nodes
+head->next = second;
+second->next = third;
+// third->next = head; // Uncomment to make it circular
+if (isCircular(head))
+cout << "List is circular" << endl;
+else
+cout << "List is not circular" << endl;
+return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+95.Single linkedlist
+#include<iostream>
+using namespace std;
+struct Node{
+    int data;
+    Node* next;
+};
+void singlelist(Node* head){
+    Node* temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<" -> ";
+        temp=temp->next;
+    }
+    cout<<"NULL";
+}
+int main(){
+    Node* head=new Node();
+    Node* second=new Node();
+    Node* third=new Node();
+    
+    head->data=10;
+    head->next=second;
+    second->data=20;
+    second->next=third;
+    third->data=30;
+    third->next=nullptr;
+    
+    singlelist(head);
+    
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+96.
+#include<iostream>
+#include<stack>
+using namespace std;
+bool isvalid(string s){
+stack<char>st;
+for(char ch:s){
+if(ch=='('||ch=='{'||ch=='['){
+st.push(ch);
+}
+else{
+if(st.empty())return false;
+char top=st.top();
+if((ch==')' && top!='(')||(ch=='[' && top!=']')|| (ch=='{' && top!
+='}')){
+return false;
+}
+st.pop();
+}
+}
+return st.empty();
+}
+int main(){
+string s;
+cout<<"Enter the string:"<<endl;
+cin>>s;
+if(isvalid(s)){
+cout<<"Valid:"<<endl;
+}
+else{
+cout<<"Not a Valid"<<endl;
+}
+return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
